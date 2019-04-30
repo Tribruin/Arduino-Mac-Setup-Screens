@@ -376,7 +376,7 @@ void loop() {
   // Prompt User to press button to continue
   statusToLCD("Press Button to", LCD_TOP_ROW);
   statusToLCD("begin macOS Setup", LCD_BOTTOM_ROW);
-  waitForButton(10);
+  waitForButton(30);
      
   // Welcome
   int keys1[] = {TAB, OPT+SPACE};
@@ -410,15 +410,15 @@ void loop() {
   sendText("Account Creation", "admin", 1);
   int  keys9[]={TAB, TAB};
   sendKeystrokes("Account Creation", keys9, 2, 0);
-  sendText("Account Creation", "Passw0rd", 0);
+  sendText("Account Creation", "Password", 0);
   keystroke(TAB);
-  sendText("Account Creation", "Passw0rd", 0);
+  sendText("Account Creation", "Password", 0);
   int keys10[]={TAB, TAB, TAB, OPT+SPACE};
   sendKeystrokes("Account Creation", keys10, 4, 0);
   
   // Express Setup
   int keys11[]={TAB, TAB, TAB, OPT+SPACE};
-  sendKeystrokes("Express Setup", keys11, 4, 15);
+  sendKeystrokes("Express Setup", keys11, 4, 20);
 
   // Choose Look
   int keys12[]={TAB, TAB, TAB, OPT+SPACE};
