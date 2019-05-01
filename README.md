@@ -1,5 +1,6 @@
 # Arduino-Mac-Setup-Screens
 
+<<<<<<< HEAD
 ## Introduction
 
 Since the introduction of macOS High Sierra, Apple has effectively eliminated imaging as an option for macOS devices. While tools such as `startosinstall` and TwoCanoes' [MDS] (https://twocanoes.com/products/mac/mac-deploy-stick/) have help bridge the gap and simplify reinstalling macOS on new and existing devices. 
@@ -46,6 +47,8 @@ By default, this loop will automatically repeat once the loop is complete. To pr
 The followings functions have been establised to make sending keystrokes and commands to the Mac. In addtion, there are addtional functions to help make user interactions a little more friendly. 
 
 
+=======
+>>>>>>> da78885f2dac5cb47589e0a57516789c6998e82c
 
 
 
