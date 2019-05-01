@@ -371,19 +371,58 @@ void waitForButton(int timeOut) {
   }
 }
 
+void pushButtonToProgram(int timeOut) {
+  /* Wait for the the button to close before proceeding
+   * This function works with either an analog pin or a digital pin. It wait for either
+   * the digital pin to go LOW or the analog pin to down below 790
+   *    timeOut = time before wait expires (for devices without a button - Set to high value to never time out
+   * If button is push, enter an endless loop to wait for programming wihtout running the application 
+   */ 
+  // while ( (digitalRead(dButtonPin) == HIGH) && (analogRead(aButtonPin) > 790));
+  int i=0;
+  int x=0;
+  bool buttonPushed = false;
+  for (i = timeOut; i > 0; i = i - 1) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    for (x = 0; x < 500; x++) {
+      delay(1);
+      if ((digitalRead(dButtonPin) == LOW ) || (analogRead(aButtonPin) < 790)) {
+        buttonPushed = true; 
+      }
+    }
+    digitalWrite(LED_BUILTIN, LOW);
+    for (x = 0; x < 500; x++) {
+      delay(1);
+      if ((digitalRead(dButtonPin) == LOW ) || (analogRead(aButtonPin) < 790)) {
+        buttonPushed = true; 
+      }
+    }
+    if (buttonPushed) {
+      statusToLCD("Programming", LCD_TOP_ROW);
+      statusToLCD("Mode", LCD_BOTTOM_ROW);
+      while(true);             // Do not proceed. 
+    }
+  }
+}
+
 void loop() {
 
+  // Wait to see if user wants to program device
+  statusToLCD("Press Button to", LCD_TOP_ROW);
+  statusToLCD("Program", LCD_BOTTOM_ROW);
+  pushButtonToProgram(10);
+  
   // Prompt User to press button to continue
   statusToLCD("Press Button to", LCD_TOP_ROW);
   statusToLCD("begin macOS Setup", LCD_BOTTOM_ROW);
   waitForButton(30);
      
   // Welcome
-  int keys1[] = {TAB, OPT+SPACE};
+  int keys1[] = {TAB, SPACE};
   sendKeystrokes("Welcome", keys1, 2, 5);
   
   //Select Keyboard
-  int keys2[] = {TAB, TAB, TAB, OPT+SPACE};
+  int keys2[] = {TAB, TAB, TAB, SPACE};
   sendKeystrokes("Keyboard", keys2, 4, 1);
 
   // Data Privacy
