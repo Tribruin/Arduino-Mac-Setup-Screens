@@ -9,9 +9,9 @@ However, even when MDM is invovled, there is still a number touches that are req
 For personal devices being handed out to end users, this is not that big of a deal, however in a lab environment, having a tech have to step through each setup screen can be cumbersome.
 
 ## Solution 
-I started looking at ways to simulate keystrokes through a USB device. Arduino makes a number of devies that can act like a HID keyboard and mouse device. The Arduino Leonardo and Arduino Mirco both support acting as a HID device and can be powered solely by the USB port. This is an ideal hardware setup. 
+I started looking at ways to simulate keystrokes through a USB device. Arduino makes a number of devies that can simulate a HID keyboard and mouse device. The Arduino Leonardo and Arduino Micro both support emulating a HID device and can be powered solely by the USB port.  
 
-From a software side, there is a Arduino Library to supports HID Keyboards and Mice (along with other HID devices). The library provides a number of commands that can send keyboard commands either as keystrokes or a full text. However, as commands and keystokes get more complex, it can be cumbersome to program the right sequence of keystrokes or follow the logic of the keystrokes once written. 
+From a software side, Adurino provide an IDE and a development library that emulates a USB HID device. The library provides a number of commands that can send keyboard commands either as keystrokes or a full text. However, as commands and keystokes get more complex, it can be cumbersome to program the right sequence of keystrokes or follow the logic of the keystrokes once written. 
 
 ## Arduino Mac Setup Screens
 
@@ -21,7 +21,7 @@ In addition, feedback can be provided to the user through either an onboard LED 
 
 ## How to build a script using the functions
 
-Arduino's programming language is based on C. It is functional, but is somewhat limtied as it is not an object orientated based programming language. In addition, the Arduino language requires a certian order of the functions. The order is:
+Arduino's programming language is based on C. It is functional, but is somewhat limited as it is not an object orientated based programming language. In addition, the Arduino language requires a certian order of the functions. The order is:
 
 1. Setup - `void setup` - Runs immediately upon power on or reset of device
 2. Function and Constant defination - Define all functions and constants (as necessary) 
@@ -47,7 +47,7 @@ The followings functions have been establised to make sending keystrokes and com
 
 `keystroke(key)` - This function will send a single keystroke to the device through the USB port. 
 
-* _key_ can be either a character ('r'), a special key (ESC), or with a modifer key (SHIFT + 'r'). 
+* _key_ can be either a character ('r') one of the special keys defined as constanats (ESC, RETURN). Modifier keys should be added to the main key with a + sign (e.g CMD+'s' or SHIFT+CMD+'q'). 
 
 `sendkeystokes(screenName, keyArray, keyArrayLen, delayLength)` - This function will will send a series of keystrokes, one every 0.5 seconds, to the device through the USB port.
 
@@ -78,22 +78,22 @@ _waitForButton(timeOut)_ - Wait for the on-board button (or the LCD button if av
 _statusToLCD(message, row)_ - Send _message_ to the LCD screen. Use the constants `LCD__TOP__ROW` or `LCD_BOTTOM_ROW` for _row_
 
 ## User Feedback
-While not required, there is a minimal amount of user feedback avaliable in the functions:
+While not required, there is a minimal amount of user feedback avaliable in the manner:
 
-* LED - The LED will flash quickly when the script is sending keystrokes. In additon, when the script is paused, either by _delayWait()_ or _waitForButton()_, the LCD wil blink on and off on a 0.5 second interval.
+* LED - The Built-in LED will flash quickly when the script is sending keystrokes. In additon, when the script is paused, either by _delayWait()_ or _waitForButton()_, the LED wil blink on and off on a 0.5 second interval.
 
 * LCD - When sending keystrokes, the LCD will display the key combination pressed on the bottom row of the LCD. This can be very helpful when troubleshooting keystrokes. 
 
 ## Sample Code & Best Practices
-* The script includes the scripts to walk through the setup screens on a non-MDM enrolled MacBookPro (2015) on Mojave. It should provide a tempalate for creating the keystrokes for other setup screens not listed. 
+* The script includes the subsections to walk through the setup screens on a non-MDM enrolled MacBookPro (2015) on Mojave. It should provide a tempalate for creating subsections for other setup screens not listed. 
 * The Arduino will initizalize quickly once power is supplied. It is suggested that the USB key be inserted at the first setup screen to prevent keys from being sent before the Mac is ready. 
 * There are a few common keystrokes that are useful when walking through setup:
 	* _TAB_ - Move between elements on the screen. 
 	* _SPACE_ - Selects the current highlighted item or presses the highlight button.
 	* _CTRL+F2_ - Allows keyboard access to the macOS menu, when the menu bar is avaliable. Once the menu is active, the arrows keystrokes and _ENTER_ key can be used to select a specific menu item.  
 	* _CTRL+OPT+CMD+t_ - Open the terminal while in setup
-* Make sure you allow enough time before sending the keystrokes. Time between screens can vary between devices. Add extra seconds when using the _delayLength_ argument. If you find that keystrokes are often being missed, adjust the _delayLength_ for that screen. 
-* Having at least one Arduino Duo with an LCD shield for troubleshooting purposes is really helpful. You can review each keystroke as they are happening. Once your script is working properly, you can use cheaper Arduino Micros or Adafruit IstyBitys 
+* Make sure you allow enough time between before sending the keystrokes. Time between screens can vary between devices. Add extra seconds when using the _delayLength_ argument. If you find that keystrokes are often being missed, increase the _delayLength_ for that screen. 
+* Having at least one Arduino Leonardo with an LCD shield for troubleshooting purposes is really helpful. You can review each keystroke as they are happening. Once your script is working properly, you can use cheaper Arduino Micros or Adafruit IstyBitys 
 * You will need to download the [Arduino IDE](https://www.arduino.cc/en/Main/Software) and [HID-Project Library](https://www.arduinolibraries.info/libraries/hid-project) to use the code and install the script on to an Adurino device.
 * While my script primarily focuses on the macOS setup screens, any computer that can use a HID keyboard input could be scripted. For example, setting BIOS screens on Windows PCs. 
 * Because the script will run as soon as the device is plugged in, it is possible and even likely, that the existing script will run while trying to program the device. The sample script includes a function to wait for a button press and, if pressed, put the script in to infinite loop. This will allow you to prevent the script from running while trying to program. 
