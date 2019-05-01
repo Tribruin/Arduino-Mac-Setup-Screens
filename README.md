@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Since the introduction of macOS High Sierra, Apple has effectively eliminated imaging as an option for macOS devices. While tools such as `startosinstall` and TwoCanoes' [MDS] (https://twocanoes.com/products/mac/mac-deploy-stick/) have helped bridge the gap and simplify reinstalling macOS on new and existing devices. 
+Since the introduction of macOS High Sierra, Apple has effectively eliminated imaging as an option for macOS devices. While tools such as `startosinstall` and TwoCanoes' [MDS](https://twocanoes.com/products/mac/mac-deploy-stick/) have helped bridge the gap and simplify reinstalling macOS on new and existing devices. 
 
 However, even when MDM is invovled, there is still a number touches that are required on each Mac to walk through User Setup. At minmum, a user must pick a Country, a keyboard layout, and (if using an MDM) agree to the remote management screen. Then depending on the Mac and any MDM setup, a number of other setup screens might require user involvement. 
 
@@ -80,21 +80,23 @@ _statusToLCD(message, row)_ - Send _message_ to the LCD screen. Use the constant
 ## User Feedback
 While not required, there is a minimal amount of user feedback avaliable in the functions:
 
-* LED - The LED will flash quickly when the script is sending keystrokes. In additon, when the script is paused [either by _delayWait()_ or _waitForButton()_], the LCD wil blink on and off on a 0.5 second interval.
+* LED - The LED will flash quickly when the script is sending keystrokes. In additon, when the script is paused, either by _delayWait()_ or _waitForButton()_, the LCD wil blink on and off on a 0.5 second interval.
 
 * LCD - When sending keystrokes, the LCD will display the key combination pressed on the bottom row of the LCD. This can be very helpful when troubleshooting keystrokes. 
 
 ## Sample Code & Best Practices
 * The script includes the scripts to walk through the setup screens on a non-MDM enrolled MacBookPro (2015) on Mojave. It should provide a tempalate for creating the keystrokes for other setup screens not listed. 
-* The Arduino will initizalize fairly quickly once power is supplied. It is suggested that the USB key be inserted at the first setup screen to prevent keys from being sent before the Mac is ready. 
+* The Arduino will initizalize quickly once power is supplied. It is suggested that the USB key be inserted at the first setup screen to prevent keys from being sent before the Mac is ready. 
 * There are a few common keystrokes that are useful when walking through setup:
 	* _TAB_ - Move between elements on the screen. 
-	* _OPT+SPACE_ - Selects the current highlighted item. 	* _CTRL+F2_ - Allows keyboard access to the macOS menu, when the menu bar is avaliable. Once the menu is active, the arrows keystrokes and _ENTER_ key can be used to select a specific menu item.  
+	* _SPACE_ - Selects the current highlighted item or presses the highlight button.
+	* _CTRL+F2_ - Allows keyboard access to the macOS menu, when the menu bar is avaliable. Once the menu is active, the arrows keystrokes and _ENTER_ key can be used to select a specific menu item.  
 	* _CTRL+OPT+CMD+t_ - Open the terminal while in setup
 * Make sure you allow enough time before sending the keystrokes. Time between screens can vary between devices. Add extra seconds when using the _delayLength_ argument. If you find that keystrokes are often being missed, adjust the _delayLength_ for that screen. 
 * Having at least one Arduino Duo with an LCD shield for troubleshooting purposes is really helpful. You can review each keystroke as they are happening. Once your script is working properly, you can use cheaper Arduino Micros or Adafruit IstyBitys 
 * You will need to download the [Arduino IDE](https://www.arduino.cc/en/Main/Software) and [HID-Project Library](https://www.arduinolibraries.info/libraries/hid-project) to use the code and install the script on to an Adurino device.
 * While my script primarily focuses on the macOS setup screens, any computer that can use a HID keyboard input could be scripted. For example, setting BIOS screens on Windows PCs. 
+* Because the script will run as soon as the device is plugged in, it is possible and even likely, that the existing script will run while trying to program the device. The sample script includes a function to wait for a button press and, if pressed, put the script in to infinite loop. This will allow you to prevent the script from running while trying to program. 
 
 ## Questions and Feedback
 Please ask any question or provide any feedback. 
