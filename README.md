@@ -4,7 +4,7 @@
 
 Since the introduction of macOS High Sierra, Apple has effectively eliminated imaging as an option for macOS devices. While tools such as `startosinstall` and TwoCanoes' [MDS](https://twocanoes.com/products/mac/mac-deploy-stick/) have helped bridge the gap and simplify reinstalling macOS on new and existing devices. 
 
-However, even when MDM is invovled, there is still a number touches that are required on each Mac to walk through User Setup. At minmum, a user must pick a Country, a keyboard layout, and (if using an MDM) agree to the remote management screen. Then depending on the Mac and any MDM setup, a number of other setup screens might require user involvement. 
+However, even when MDM is invovled, there is still a number touches that are required on each Mac to walk through User Setup. At minimum, a user must pick a Country, a keyboard layout, and (if using an MDM) agree to the remote management screen. Then depending on the Mac and any MDM setup, a number of other setup screens might require user involvement. 
 
 For personal devices being handed out to end users, this is not that big of a deal, however in a lab environment, having a tech have to step through each setup screen can be cumbersome.
 
