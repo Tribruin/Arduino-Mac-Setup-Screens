@@ -84,6 +84,7 @@ void keystroke(int key) {
 
 /* This section checks to see if the keyboard modifiers have been added to the key command. If mulitple modifiers are added, it will press all of them
  */
+
   String keyDisplay = "";
   if (key >= CMD) {
       key = key - CMD;
@@ -113,6 +114,7 @@ void keystroke(int key) {
   digitalWrite(LED_BUILTIN, HIGH);        // Turn on LED before keystroke
 
   // Check for "special" keys due to the way that HID-PROJECT handles non-ASCII keys on the keyboard.
+  
   switch(key) {
     
     case UP:
@@ -271,9 +273,11 @@ void keystroke(int key) {
 }
 
 void delayWait(int timeInSecs){
+
   /* This function executes a delay and prints a count down on the LCD 
    *    timeInSecs = # of secs to wait
    */
+
    for (int i = timeInSecs; i > 0; i = i - 1) {
       String message = String(String(i) + " secs");
       statusToLCD(message, LCD_BOTTOM_ROW);
@@ -285,11 +289,13 @@ void delayWait(int timeInSecs){
 }
 
 void statusToLCD(String message, int row) {
+
   /* This function prints a message on the LCD display. 
    *    message = message to display
    *    row = row (LCD_TOP_ROW or LCD_BOTTOM_ROW) to display the message
    *  message is left justified. 
    */
+
   lcd.setCursor(0,row);                 // Set cursor to row
   lcd.print("                ");        // Clear the row of any existing text
   lcd.setCursor(0,row);                 // Set cursor back to the beginning of the row. 
@@ -297,6 +303,7 @@ void statusToLCD(String message, int row) {
 }
 
 void sendKeystrokes( String screenName, int keyArray[], int keyArrayLen, int delayLength) {
+
   /* This function sends a series of keystrokes in sucession to the HID devices
    *    screenName = name of the screen to displayed on the LCD
    *    keyArray = Array of keystrokes to send in succession (see below for details)
@@ -323,6 +330,7 @@ void sendKeystrokes( String screenName, int keyArray[], int keyArrayLen, int del
 }
 
 void sendText(String screenName, String command, int delayLength) {
+
   /* This function sends a line of text to the USB HID output
    *    screenName = name of the screen to displayed on the LCD
    *    command = text to be "typed" by the HID device. To add a return at the end, use \n at the end of your test
@@ -340,13 +348,14 @@ void sendText(String screenName, String command, int delayLength) {
 }
 
 void waitForButton(int timeOut) {
+ 
   /* Wait for the the button to close before proceeding
    * This function works with either an analog pin or a digital pin. It wait for either
    * the digital pin to go LOW or the analog pin to down below 790
    *    timeOut = time before wait expires (for devices without a button - Set to high value to never time out
    * 
    */ 
-  // while ( (digitalRead(dButtonPin) == HIGH) && (analogRead(aButtonPin) > 790));
+
   int i=0;
   int x=0;
   bool buttonPushed = false;
@@ -372,13 +381,14 @@ void waitForButton(int timeOut) {
 }
 
 void pushButtonToProgram(int timeOut) {
+
   /* Wait for the the button to close before proceeding
    * This function works with either an analog pin or a digital pin. It wait for either
    * the digital pin to go LOW or the analog pin to down below 790
    *    timeOut = time before wait expires (for devices without a button - Set to high value to never time out
    * If button is push, enter an endless loop to wait for programming wihtout running the application 
    */ 
-  // while ( (digitalRead(dButtonPin) == HIGH) && (analogRead(aButtonPin) > 790));
+
   int i=0;
   int x=0;
   bool buttonPushed = false;
