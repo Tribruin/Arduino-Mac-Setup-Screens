@@ -71,11 +71,11 @@ Arguements required:
 
 **NOTE:** If you need a return after sending the text, either add the `\n` escape code to the end of the command or send a `keystroke(RETURN)` command immediatly following. 
 
-_delayWait(timeInSecs)_ - Wait _timeInSecs_ seconds before proceeding. The LED will blink during this wait. 
+`delayWait(timeInSecs)` - Wait _timeInSecs_ seconds before proceeding. The LED will blink during this wait. 
 
-_waitForButton(timeOut)_ - Wait for the on-board button (or the LCD button if avaliable) to be pressed. If not button is pressed before _timeOut_ seconds, the script will automatically continue. If is suggested this be your first command in the _loop()_ to allow time after plugging in the Arduino to reprogram it. Otherwise, when plugging in to your programming computer, your computer will start receiving keystokes. 
+`waitForButton(timeOut)` - Wait for the on-board button (or the LCD button if avaliable) to be pressed. If not button is pressed before _timeOut_ seconds, the script will automatically continue. If is suggested this be your first command in the _loop()_ to allow time after plugging in the Arduino to reprogram it. Otherwise, when plugging in to your programming computer, your computer will start receiving keystokes. 
 
-_statusToLCD(message, row)_ - Send _message_ to the LCD screen. Use the constants `LCD__TOP__ROW` or `LCD_BOTTOM_ROW` for _row_
+`statusToLCD(message, row)` - Send _message_ to the LCD screen. Use the constants `LCD__TOP__ROW` or `LCD_BOTTOM_ROW` for _row_
 
 ## User Feedback
 While not required, there is a minimal amount of user feedback avaliable in the manner:
